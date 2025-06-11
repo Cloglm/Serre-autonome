@@ -1,0 +1,307 @@
+/* --- CSS Reset/Normalization (Simple) --- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px; /* Base font size */
+    scroll-behavior: smooth;
+}
+
+/*
+   The main body styles (font-family, background-color, flex for sticky footer)
+   are already in your header_footer_style.css.
+   If you want to centralize them here, you can move them:
+*/
+/*
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f7f6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+*/
+/*
+   If you move the body styles here, make sure to remove or comment them out
+   from header_footer_style.css to avoid conflicts.
+   For now, we'll assume the body styles in header_footer_style.css are primary.
+*/
+
+
+/* --- General Typography --- */
+body { /* Add some base text styling if not fully covered by header_footer_style.css */
+    line-height: 1.6;
+    color: #333; /* Default text color */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 0.75em;
+    line-height: 1.2;
+    font-weight: bold;
+    color: #2c3e50; /* A darker, slightly desaturated blue for headings */
+}
+
+h1 { font-size: 2.5rem; } /* Example: 40px */
+h2 { font-size: 2rem; }   /* Example: 32px */
+h3 { font-size: 1.75rem; } /* Example: 28px */
+h4 { font-size: 1.5rem; }  /* Example: 24px */
+h5 { font-size: 1.25rem; } /* Example: 20px */
+h6 { font-size: 1rem; }    /* Example: 16px */
+
+p {
+    margin-bottom: 1rem; /* 16px */
+}
+
+a {
+    color: #007bff; /* Default link color (can be overridden) */
+    text-decoration: none; /* Remove underline by default */
+}
+
+a:hover {
+    text-decoration: underline; /* Add underline on hover */
+    color: #0056b3; /* Darker shade on hover */
+}
+
+strong, b {
+    font-weight: bold;
+}
+
+em, i {
+    font-style: italic;
+}
+
+ul, ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem; /* Indent lists */
+}
+
+li {
+    margin-bottom: 0.25rem;
+}
+
+/* --- Images --- */
+img {
+    max-width: 100%; /* Responsive images */
+    height: auto;
+    display: block; /* Remove extra space below images */
+}
+
+/* --- Basic Layout Helpers --- */
+.container {
+    width: 90%;
+    max-width: 1140px; /* Common max-width for content */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Example: This might be used for your form containers or event detail containers */
+/* if you want a consistent centered content block */
+.page-content-container {
+    width: 90%;
+    max-width: 960px; /* Slightly narrower for focused content */
+    margin: 20px auto; /* Top/bottom margin and auto for left/right centering */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+
+/* --- General Button Styling (can be extended or overridden) --- */
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem; /* 6px 12px */
+    font-size: 1rem; /* 16px */
+    line-height: 1.5;
+    border-radius: 0.25rem; /* 4px */
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #0056b3;
+    border-color: #0056b3;
+    text-decoration: none;
+}
+
+.btn-secondary {
+    color: #fff;
+    background-color: #6c757d; /* Grey */
+    border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    color: #fff;
+    background-color: #545b62;
+    border-color: #545b62;
+    text-decoration: none;
+}
+
+/* --- Form Elements (General Styling - forms.css can be more specific) --- */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+input[type="number"],
+input[type="date"],
+input[type="time"],
+select,
+textarea {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    margin-bottom: 0.5rem; /* Basic spacing */
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+
+/* --- Utility Classes --- */
+.text-center { text-align: center !important; }
+.text-left   { text-align: left !important; }
+.text-right  { text-align: right !important; }
+
+.mt-1 { margin-top: 0.25rem !important; }
+.mt-2 { margin-top: 0.5rem !important; }
+.mt-3 { margin-top: 1rem !important; }
+.mt-4 { margin-top: 1.5rem !important; }
+.mt-5 { margin-top: 3rem !important; }
+
+.mb-1 { margin-bottom: 0.25rem !important; }
+.mb-2 { margin-bottom: 0.5rem !important; }
+.mb-3 { margin-bottom: 1rem !important; }
+.mb-4 { margin-bottom: 1.5rem !important; }
+.mb-5 { margin-bottom: 3rem !important; }
+
+/* Add more utilities as needed */
+/* CSS/main_style.css ou un fichier spécifique */
+
+/* Conteneur pour l'image et le bouton favori sur les cartes (lobby) */
+.event-card-image-container {
+    position: relative;
+    overflow: hidden; /* Pour s'assurer que le bouton ne dépasse pas si mal positionné */
+}
+.event-card-image-container .event-image {
+    display: block; /* Évite l'espace en dessous de l'image */
+    width: 100%;
+    /* height: 200px;  Vous avez peut-être déjà cette règle */
+    /* object-fit: cover; */
+}
+
+.btn-favorite {
+    background-color: rgba(255, 255, 255, 0.85); /* Fond légèrement transparent */
+    border: 1px solid #ccc;
+    color: #555; /* Couleur du coeur par défaut */
+    padding: 6px 8px; /* Ajustez pour la taille désirée */
+    border-radius: 50%; /* Pour un bouton rond */
+    cursor: pointer;
+    font-size: 1.3em; /* Taille de l'icône coeur */
+    line-height: 1; /* Important pour l'alignement vertical de l'icône */
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Transition avec effet rebond */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    /* Positionnement pour les cartes d'événements dans le lobby */
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 5; /* Pour être au-dessus de l'image */
+}
+
+.btn-favorite:hover {
+    background-color: white;
+    border-color: #d32f2f; /* Rouge plus foncé au survol */
+    color: #d32f2f;
+    transform: scale(1.1);
+}
+
+.btn-favorite.is-favorite {
+    background-color: #e53935; /* Rouge quand favori */
+    color: white; /* Coeur blanc sur fond rouge */
+    border-color: #c62828; /* Bordure rouge plus foncée */
+}
+.btn-favorite.is-favorite:hover {
+    background-color: #c62828; /* Rouge plus foncé au survol quand déjà favori */
+    border-color: #b71c1c;
+}
+
+.btn-favorite .heart-icon {
+    display: inline-block; /* Permet les transformations */
+    vertical-align: middle;
+}
+.btn-favorite.is-favorite .heart-icon {
+    animation: favoritePulse 0.5s ease-out;
+}
+
+@keyframes favoritePulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+
+/* Styles spécifiques pour le bouton favori sur event_detail.php (si différent) */
+.event-actions-header { /* Conteneur que j'ai suggéré pour event_detail.php */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.event-actions-header .btn-favorite {
+    position: static; /* Rétablir le positionnement statique */
+    font-size: 1em; /* Taille de police normale pour le texte */
+    padding: 8px 15px; /* Plus de padding pour le texte */
+    border-radius: 5px; /* Moins rond, plus comme un bouton standard */
+    width: auto; /* S'adapte au contenu */
+}
+.event-actions-header .btn-favorite .heart-icon {
+    margin-right: 6px; /* Espace entre l'icône et le texte */
+    font-size: 1.1em; /* Icône légèrement plus grande que le texte */
+}
+.event-actions-header .btn-favorite .favorite-text {
+    font-size: 0.9em; /* Texte du bouton */
+    vertical-align: middle;
+}

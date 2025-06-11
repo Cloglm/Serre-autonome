@@ -49,6 +49,8 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && isset($_SE
 // --- FIN AJOUT ---
 
 ?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -57,7 +59,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && isset($_SE
     <title><?php echo isset($page_title) ? htmlspecialchars($page_title) : 'MeetSpot'; ?></title>
     <!-- Utilisation de $base_path_for_header pour les CSS -->
     <link rel="stylesheet" href="<?php echo $base_path_for_header; ?>CSS/main_style.css">
-    <link rel="stylesheet" href="<?php echo $base_path_for_header; ?>CSS/header_footer_style.css">
+    <link rel="stylesheet" href="<?php echo $base_path_for_header; ?>CSS/header-footer-style.css">
     <link rel="stylesheet" href="<?php echo $base_path_for_header; ?>CSS/forms.css">
     <link rel="stylesheet" href="<?php echo $base_path_for_header; ?>CSS/lobby.css">
     <style>
