@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1; /* Pour pousser le footer en bas si peu de contenu */
+}
+
+footer {
+    background-color: #222;
+    color: #f0f0f0;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.footer-links {
+    margin-bottom: 15px;
+}
+
+.footer-links a {
+    color: #aaa;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 15px;
+}
+
+.footer-links a:hover {
+    color: #fff;
+}
+
+.footer-socials img {
+    width: 24px;
+    margin: 0 8px;
+    vertical-align: middle;
+}
+
+@media (max-width: 600px) {
+    .footer-links a {
+        display: block;
+        margin: 8px 0;
+    }
+}
