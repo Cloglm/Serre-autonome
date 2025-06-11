@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serre Autonome - Tableau de Bord</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <main class="dashboard-container">
+        <h1>Tableau de Bord</h1>
+        
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h3>Température</h3>
+                <canvas id="temperatureChart"></canvas>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Humidité</h3>
+                <canvas id="humidityChart"></canvas>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Luminosité</h3>
+                <canvas id="lightChart"></canvas>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Statistiques</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-label">Température moyenne</span>
+                        <span class="stat-value">24°C</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Humidité moyenne</span>
+                        <span class="stat-value">65%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Luminosité moyenne</span>
+                        <span class="stat-value">750 lux</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Consommation d'eau</span>
+                        <span class="stat-value">2.5L/jour</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-card weather-card">
+                <h3>Météo Extérieure</h3>
+                <div class="current-weather">
+                    <div class="weather-main">
+                        <i class="fas fa-sun weather-icon"></i>
+                        <div class="weather-temp">22°C</div>
+                    </div>
+                    <div class="weather-details">
+                        <div class="weather-item">
+                            <i class="fas fa-wind"></i>
+                            <span>15 km/h</span>
+                        </div>
+                        <div class="weather-item">
+                            <i class="fas fa-tint"></i>
+                            <span>45%</span>
+                        </div>
+                        <div class="weather-item">
+                            <i class="fas fa-cloud"></i>
+                            <span>Ensoleillé</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="weather-forecast">
+                    <h4>Prévisions sur 5 jours</h4>
+                    <div class="forecast-grid">
+                        <div class="forecast-day" data-day="Lundi">
+                            <div class="day">Lun</div>
+                            <i class="fas fa-sun"></i>
+                            <div class="temp">24°C</div>
+                        </div>
+                        <div class="forecast-day" data-day="Mardi">
+                            <div class="day">Mar</div>
+                            <i class="fas fa-cloud-sun"></i>
+                            <div class="temp">22°C</div>
+                        </div>
+                        <div class="forecast-day" data-day="Mercredi">
+                            <div class="day">Mer</div>
+                            <i class="fas fa-cloud"></i>
+                            <div class="temp">20°C</div>
+                        </div>
+                        <div class="forecast-day" data-day="Jeudi">
+                            <div class="day">Jeu</div>
+                            <i class="fas fa-cloud-rain"></i>
+                            <div class="temp">18°C</div>
+                        </div>
+                        <div class="forecast-day" data-day="Vendredi">
+                            <div class="day">Ven</div>
+                            <i class="fas fa-cloud-sun"></i>
+                            <div class="temp">21°C</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal pour les détails météo -->
+    <div class="weather-modal" id="weatherModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Détails météo - <span id="modalDay"></span></h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-weather-main">
+                    <i class="fas fa-sun modal-weather-icon"></i>
+                    <div class="modal-weather-temp">24°C</div>
+                </div>
+                <div class="modal-weather-details">
+                    <div class="modal-detail-item">
+                        <i class="fas fa-temperature-high"></i>
+                        <div class="detail-info">
+                            <span class="detail-label">Température maximale</span>
+                            <span class="detail-value">26°C</span>
+                        </div>
+                    </div>
+                    <div class="modal-detail-item">
+                        <i class="fas fa-temperature-low"></i>
+                        <div class="detail-info">
+                            <span class="detail-label">Température minimale</span>
+                            <span class="detail-value">18°C</span>
+                        </div>
+                    </div>
+                    <div class="modal-detail-item">
+                        <i class="fas fa-wind"></i>
+                        <div class="detail-info">
+                            <span class="detail-label">Vitesse du vent</span>
+                            <span class="detail-value">15 km/h</span>
+                        </div>
+                    </div>
+                    <div class="modal-detail-item">
+                        <i class="fas fa-tint"></i>
+                        <div class="detail-info">
+                            <span class="detail-label">Humidité</span>
+                            <span class="detail-value">45%</span>
+                        </div>
+                    </div>
+                    <div class="modal-detail-item">
+                        <i class="fas fa-sun"></i>
+                        <div class="detail-info">
+                            <span class="detail-label">UV Index</span>
+                            <span class="detail-value">Modéré</span>
+                        </div>
+                    </div>
+                    <div class="modal-detail-item">
+                        <i class="fas fa-cloud-rain"></i>
+                        <div class="detail-info">
+                            <span class="detail-label">Précipitations</span>
+                            <span class="detail-value">10%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-hourly-forecast">
+                    <h4>Prévisions horaires</h4>
+                    <div class="hourly-grid">
+                        <!-- Les prévisions horaires seront ajoutées dynamiquement -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html> 
