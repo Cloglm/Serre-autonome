@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serre Autonome - Contrôle Moteur</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/control.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <main class="dashboard-container">
+        <h1>Contrôle du Moteur</h1>
+        
+        <div class="dashboard-grid">
+            <div class="dashboard-card motor-control-card">
+                <h3>État du Moteur</h3>
+                <div class="motor-status-section">
+                    <i id="motorIcon" class="fas fa-power-off motor-status-icon off"></i>
+                    <span id="motorStatusText" class="motor-status-text off">OFF</span>
+                </div>
+                <button id="motorToggleButton" class="motor-toggle-button off">
+                    <i class="fas fa-toggle-off"></i> Allumer
+                </button>
+            </div>
+
+            <div class="dashboard-card motor-control-card">
+                <h3>Vitesse de Rotation</h3>
+                <div class="speed-display">
+                    <i class="fas fa-tachometer-alt speed-icon"></i>
+                    <span id="motorSpeedValue" class="speed-value">0</span> %
+                </div>
+                <input type="range" id="motorSpeedSlider" min="0" max="100" value="0" disabled>
+            </div>
+
+            <div class="dashboard-card motor-control-card">
+                <h3>Informations Moteur</h3>
+                <div class="motor-info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Type</span>
+                        <span class="info-value">Pompe à eau</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Dernière activation</span>
+                        <span class="info-value" id="lastActivation">N/A</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Temps de fonctionnement total</span>
+                        <span class="info-value">12h 34min</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Mode</span>
+                        <span class="info-value">Manuel</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-card motor-log-card">
+                <h3>Historique d'Activités</h3>
+                <div class="log-entries">
+                    <div class="log-item">
+                        <span class="log-time">2023-10-27 14:30</span> - Moteur ALLUMÉ (75%)
+                    </div>
+                    <div class="log-item">
+                        <span class="log-time">2023-10-27 14:15</span> - Moteur ÉTEINT
+                    </div>
+                    <div class="log-item">
+                        <span class="log-time">2023-10-27 12:00</span> - Moteur ALLUMÉ (50%)
+                    </div>
+                    <div class="log-item">
+                        <span class="log-time">2023-10-27 10:00</span> - Moteur ÉTEINT
+                    </div>
+                    <div class="log-item">
+                        <span class="log-time">2023-10-27 08:00</span> - Moteur ALLUMÉ (100%)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/control.js"></script>
+</body>
+</html>
