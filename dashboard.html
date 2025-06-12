@@ -6,6 +6,16 @@
     <title>Serre Autonome - Tableau de Bord</title>
     <link rel="stylesheet" href="css/dashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@2"></script>
+
+    <!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- date-fns (nécessaire pour l’adapter) -->
+<script src="https://cdn.jsdelivr.net/npm/date-fns@2.30.0/dist/date-fns.min.js"></script>
+<!-- adapter-date-fns UMD bundle -->
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@2.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -33,15 +43,15 @@
                 <div class="stats-grid">
                     <div class="stat-item">
                         <span class="stat-label">Température moyenne</span>
-                        <span class="stat-value">24°C</span>
+                        <span class="stat-value temp">--°C</span>
                     </div>
                     <div class="stat-item">
                         <span class="stat-label">Humidité moyenne</span>
-                        <span class="stat-value">65%</span>
+                        <span class="stat-value hum">--%</span>
                     </div>
                     <div class="stat-item">
                         <span class="stat-label">Luminosité moyenne</span>
-                        <span class="stat-value">750 lux</span>
+                        <span class="stat-value lux">-- lux</span>
                     </div>
                     <div class="stat-item">
                         <span class="stat-label">Consommation d'eau</span>
