@@ -20,6 +20,177 @@ document.addEventListener('DOMContentLoaded', () => {
         document.head.appendChild(link);
       });
   
+    // ─── Configuration des seuils d'alerte ───────────────────────────────────
+    const SEUILS = {
+        temperature: { min: 15, max: 30 },
+        humidity: { min: 40, max: 80 },
+        brightness: { min: 200, max: 1000 }
+    };
+  
+    // ─── Système de notification ────────────────────────────────────────────
+    let activeAlerts = new Set();
+    let alertHistory = [];
+  
+    function createNotificationContainer() {
+        const container = document.createElement('div');
+        container.className = 'notification-container';
+        container.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 300px;
+        `;
+        document.body.appendChild(container);
+        return container;
+    }
+  
+    function createAlertHistoryContainer() {
+        const container = document.createElement('div');
+        container.className = 'alert-history-container';
+        container.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        `;
+        
+        const header = document.createElement('div');
+        header.style.cssText = `
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+        `;
+        
+        const title = document.createElement('h3');
+        title.textContent = 'Historique des Alertes';
+        title.style.margin = '0';
+        
+        const closeBtn = document.createElement('button');
+        closeBtn.innerHTML = '&times;';
+        closeBtn.style.cssText = `
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 0 5px;
+        `;
+        closeBtn.onclick = () => container.style.display = 'none';
+        
+        header.appendChild(title);
+        header.appendChild(closeBtn);
+        container.appendChild(header);
+        
+        const historyList = document.createElement('div');
+        historyList.className = 'alert-history-list';
+        container.appendChild(historyList);
+        
+        document.body.appendChild(container);
+        return container;
+    }
+  
+    const notificationContainer = createNotificationContainer();
+    const alertHistoryContainer = createAlertHistoryContainer();
+    const historyList = alertHistoryContainer.querySelector('.alert-history-list');
+  
+    function showNotification(message, type = 'warning', alertId) {
+        if (activeAlerts.has(alertId)) return;
+  
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.style.cssText = `
+            padding: 15px;
+            border-radius: 5px;
+            background-color: ${type === 'warning' ? '#fff3cd' : '#d4edda'};
+            border-left: 4px solid ${type === 'warning' ? '#ffc107' : '#28a745'};
+            animation: slideIn 0.5s ease-out;
+            position: relative;
+        `;
+  
+        const closeBtn = document.createElement('button');
+        closeBtn.innerHTML = '&times;';
+        closeBtn.style.cssText = `
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 0 5px;
+        `;
+        closeBtn.onclick = () => {
+            notification.remove();
+            activeAlerts.delete(alertId);
+        };
+  
+        notification.textContent = message;
+        notification.appendChild(closeBtn);
+        notificationContainer.appendChild(notification);
+        activeAlerts.add(alertId);
+  
+        // Ajouter à l'historique
+        const timestamp = new Date().toLocaleString('fr-FR');
+        alertHistory.unshift({ message, type, timestamp });
+        updateAlertHistory();
+    }
+  
+    function updateAlertHistory() {
+        historyList.innerHTML = '';
+        alertHistory.slice(0, 10).forEach(alert => {
+            const alertItem = document.createElement('div');
+            alertItem.style.cssText = `
+                padding: 8px;
+                margin-bottom: 5px;
+                border-radius: 3px;
+                background-color: ${alert.type === 'warning' ? '#fff3cd' : '#d4edda'};
+                border-left: 3px solid ${alert.type === 'warning' ? '#ffc107' : '#28a745'};
+                font-size: 12px;
+            `;
+            alertItem.innerHTML = `
+                <div style="font-weight: bold;">${alert.message}</div>
+                <div style="color: #666; font-size: 10px;">${alert.timestamp}</div>
+            `;
+            historyList.appendChild(alertItem);
+        });
+    }
+  
+    function checkThresholds(stats) {
+        // Vérification de la température
+        if (stats.temperature.avg < SEUILS.temperature.min) {
+            showNotification(`Température trop basse: ${stats.temperature.avg}°C`, 'warning', 'temp_low');
+        } else if (stats.temperature.avg > SEUILS.temperature.max) {
+            showNotification(`Température trop élevée: ${stats.temperature.avg}°C`, 'warning', 'temp_high');
+        }
+  
+        // Vérification de l'humidité
+        if (stats.humidity.avg < SEUILS.humidity.min) {
+            showNotification(`Humidité trop basse: ${stats.humidity.avg}%`, 'warning', 'hum_low');
+        } else if (stats.humidity.avg > SEUILS.humidity.max) {
+            showNotification(`Humidité trop élevée: ${stats.humidity.avg}%`, 'warning', 'hum_high');
+        }
+  
+        // Vérification de la luminosité
+        if (stats.brightness.avg < SEUILS.brightness.min) {
+            showNotification(`Luminosité trop basse: ${stats.brightness.avg} lux`, 'warning', 'light_low');
+        } else if (stats.brightness.avg > SEUILS.brightness.max) {
+            showNotification(`Luminosité trop élevée: ${stats.brightness.avg} lux`, 'warning', 'light_high');
+        }
+    }
+  
     // ─── 1) Bloc de mock-chart (permet de vérifier le rendu avant BDD) ─────────
     const chartConfig = {
   type: 'line',
@@ -34,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     },
     scales: {
-      // ** Axe X en “time” pour interpréter vos timestamps **
+      // ** Axe X en "time" pour interpréter vos timestamps **
       x: {
         type: 'time',
         time: {
@@ -124,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
     async function fetchData() {
       try {
         // données temps réel
-        const resData = await fetch('PHP/get_data.php');
+        const resData = await fetch('PHP/get_data_local.php');
         const series  = await resData.json();
         tempChart.data.datasets[0].data  = series.temperature;
         humChart.data.datasets[0].data   = series.humidity;
@@ -132,13 +303,14 @@ document.addEventListener('DOMContentLoaded', () => {
         tempChart.update(); humChart.update(); lightChart.update();
   
         // statistiques globales
-        const resStats = await fetch('PHP/get_stats.php');
+        const resStats = await fetch('PHP/get_stats_local.php');
         const stats    = await resStats.json();
         const statEls  = document.querySelectorAll('.stat-value');
         statEls[0].textContent = stats.temperature.avg + '°C';
         statEls[1].textContent = stats.humidity.avg    + '%';
         statEls[2].textContent = stats.brightness.avg  + ' lux';
         // si vous avez une mesure eau, ajoutez ici statEls[3]…
+        checkThresholds(stats);
       } catch (err) {
         console.error('fetchData error:', err);
       }
@@ -272,5 +444,24 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   
+    // Ajouter un bouton pour afficher l'historique
+    const historyButton = document.createElement('button');
+    historyButton.textContent = 'Historique des Alertes';
+    historyButton.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        z-index: 999;
+    `;
+    historyButton.onclick = () => {
+        alertHistoryContainer.style.display = alertHistoryContainer.style.display === 'none' ? 'block' : 'none';
+    };
+    document.body.appendChild(historyButton);
   });
   

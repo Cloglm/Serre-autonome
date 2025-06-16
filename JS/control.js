@@ -1,4 +1,25 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // ─── 0) Injection dynamique du header et du footer ────────────────────────
+    fetch('PHP/header.php')
+      .then(r => r.text())
+      .then(html => document.body.insertAdjacentHTML('afterbegin', html))
+      .catch(e => console.error('Erreur chargement header:', e));
+  
+    fetch('PHP/footer.php')
+      .then(r => r.text())
+      .then(html => document.body.insertAdjacentHTML('beforeend', html))
+      .catch(e => console.error('Erreur chargement footer:', e));
+  
+    // On ajoute aussi les CSS du header/footer (paths à ajuster si besoin)
+    ['css/header.css', 'css/footer.css', 'css/header-footer-style.css']
+      .forEach(href => {
+        const link = document.createElement('link');
+        link.rel  = 'stylesheet';
+        link.href = href;
+        document.head.appendChild(link);
+      });
+
+
     const motorToggleButton = document.getElementById('motorToggleButton');
     const motorIcon = document.getElementById('motorIcon');
     const motorStatusText = document.getElementById('motorStatusText');
@@ -8,7 +29,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const logEntriesDiv = document.querySelector('.log-entries');
 
     let isMotorOn = false;
-
+let etat = false; 
+document.getElementById('motorToggleButton').addEventListener('click', () => {
+      etat = !etat;
+      fetch(`http://localhost:5000/motor?state=${etat?'on':'off'}`)
+        .then(resp => resp.text())
+        .then(txt  => console.log(txt))
+        .catch(err => console.error('Erreur AJAX :', err));
+    });
+    
     function updateMotorStatus() {
         if (isMotorOn) {
             motorToggleButton.textContent = 'Éteindre';
