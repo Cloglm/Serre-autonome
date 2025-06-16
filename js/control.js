@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(html => document.body.insertAdjacentHTML('beforeend', html))
       .catch(e => console.error('Erreur chargement footer:', e));
   
-    // On ajoute aussi les CSS du header/footer (paths à ajuster si besoin)
+    // On ajoute aussi les css du header/footer (paths à ajuster si besoin)
     ['css/header.css', 'css/footer.css', 'css/header-footer-style.css']
       .forEach(href => {
         const link = document.createElement('link');
