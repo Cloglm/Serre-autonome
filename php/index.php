@@ -8,6 +8,10 @@
     
     <p>Accès Partie résultats<a href="dashboard.html">Résultats</a>
 
+    <a href="php/Pageinscription.php">inscription</a>
+
+    <a href="php/PageConnection.php">connection</a>
+
 
 
 </p>
