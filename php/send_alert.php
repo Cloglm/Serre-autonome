@@ -6,9 +6,9 @@ $dbHost   = '127.0.0.1';
 $dbName   = 'serre_test';
 $dbUser   = 'root';
 $dbPass   = '';
-$toEmail  = 'destinataire@example.com';    // L'adresse qui doit recevoir l'alerte
+$toEmail  = 'allandu97435@gmail.com';    
 $fromName = 'Serre Autonome';
-$fromMail = 'alerte@monsite.local';
+$fromMail = 'allandu97435@gmail.com';
 
 // Seuils (min et max) pour chaque capteur
 $thresholds = [
