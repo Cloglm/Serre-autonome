@@ -1,36 +1,28 @@
 <?php
-// get_stats.php
+// get_stats.php — nouvelle version ▼
 header('Content-Type: application/json; charset=utf-8');
 
-// 1) Connexion PDO
-$host = 'herogu.garageisep.com';
-$db   = '8tQjb0ov2H_serre_auto';
-$user = 'CpZoJWSnPV_serre_auto';
-$pass = 'XqUTQ7FjLH2yql3X';
-$dsn  = "mysql:host=$host;dbname=$db;charset=utf8mb4";
-$pdo = new PDO($dsn, $user, $pass, [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-]);
+$pdo = new PDO(
+    sprintf('mysql:host=%s;dbname=%s;charset=utf8mb4',
+            getenv('DB_HOST') ?: '185.216.26.53',
+            getenv('DB_NAME') ?: 'app_g1'),
+    getenv('DB_USER') ?: 'g1b',
+    getenv('DB_PASS') ?: 'azertyg1b',
+    [ PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+      PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC ]
+);
 
-// 2) Calculer min, max, avg pour chaque capteur
-$sensors = [
-    'temperature' => 'Temperature',
-    'humidity'    => 'Humidity',
-    'brightness'  => 'Brightness'
-];
-$stats = [];
+$sensors = ['temperature','humidity','light'];
+$stats   = [];
 
-foreach ($sensors as $key => $table) {
-    $stmt = $pdo->query("
-        SELECT
-          MIN(valeur) AS min,
-          MAX(valeur) AS max,
-          ROUND(AVG(valeur), 2) AS avg
-        FROM `$table`
+foreach ($sensors as $tbl) {
+    $q = $pdo->query("
+        SELECT MIN(val)           AS min,
+               MAX(val)           AS max,
+               ROUND(AVG(val),2)  AS avg
+        FROM   `$tbl`
     ");
-    $stats[$key] = $stmt->fetch();
+    $stats[$tbl] = $q->fetch();
 }
 
-// 3) Envoyer le JSON
 echo json_encode($stats);

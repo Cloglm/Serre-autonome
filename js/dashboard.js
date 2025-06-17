@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const SEUILS = {
         temperature: { min: 15, max: 30 },
         humidity: { min: 40, max: 80 },
-        brightness: { min: 200, max: 1000 }
+        light: { min: 200, max: 1000 }
     };
   
     // ─── Système de notification ────────────────────────────────────────────
@@ -184,10 +184,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
   
         // Vérification de la luminosité
-        if (stats.brightness.avg < SEUILS.brightness.min) {
-            showNotification(`Luminosité trop basse: ${stats.brightness.avg} lux`, 'warning', 'light_low');
-        } else if (stats.brightness.avg > SEUILS.brightness.max) {
-            showNotification(`Luminosité trop élevée: ${stats.brightness.avg} lux`, 'warning', 'light_high');
+        if (stats.light.avg < SEUILS.light.min) {
+            showNotification(`Luminosité trop basse: ${stats.light.avg} lux`, 'warning', 'light_low');
+        } else if (stats.light.avg > SEUILS.light.max) {
+            showNotification(`Luminosité trop élevée: ${stats.light.avg} lux`, 'warning', 'light_high');
         }
     }
   
@@ -295,20 +295,20 @@ document.addEventListener('DOMContentLoaded', () => {
     async function fetchData() {
       try {
         // données temps réel
-        const resData = await fetch('PHP/get_data_local.php');
+        const resData = await fetch('PHP/get_data.php');
         const series  = await resData.json();
         tempChart.data.datasets[0].data  = series.temperature;
         humChart.data.datasets[0].data   = series.humidity;
-        lightChart.data.datasets[0].data = series.brightness;
+        lightChart.data.datasets[0].data = series.light;
         tempChart.update(); humChart.update(); lightChart.update();
   
         // statistiques globales
-        const resStats = await fetch('PHP/get_stats_local.php');
+        const resStats = await fetch('PHP/get_stats.php');
         const stats    = await resStats.json();
         const statEls  = document.querySelectorAll('.stat-value');
         statEls[0].textContent = stats.temperature.avg + '°C';
         statEls[1].textContent = stats.humidity.avg    + '%';
-        statEls[2].textContent = stats.brightness.avg  + ' lux';
+        statEls[2].textContent = stats.light.avg  + ' lux';
         // si vous avez une mesure eau, ajoutez ici statEls[3]…
         checkThresholds(stats);
       } catch (err) {
