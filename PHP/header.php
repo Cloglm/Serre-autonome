@@ -15,9 +15,9 @@
     <nav class="navbar">
         <h2>Serre Autonome</h2>
         <ul class="nav-links">
-            <li><a href="/index.php">Accueil</a></li>
-            <li><a href="/controle.php">Contrôle</a></li>
-            <li><a href="/dashboard.php">Dashboard</a></li>
+            <li><a href="/Serre-autonome/index.php">Accueil</a></li>
+            <li><a href="/Serre-autonome/control.html">Contrôle</a></li>
+            <li><a href="/Serre-autonome/dashboard.html">Dashboard</a></li>
         </ul>
     </nav>
 </header>
