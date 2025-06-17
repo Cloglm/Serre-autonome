@@ -57,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="Pageinscription.css">
 </head>
 <body>
+    <?php include 'header.php'; ?>
 
     <form action="" method="post">
         <h2>Inscription</h2>
@@ -78,6 +79,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <button type="submit">S'inscrire</button>
     </form>
-
+    <?php include 'footer.php'; ?>
 </body>
 </html>

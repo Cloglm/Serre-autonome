@@ -5,6 +5,7 @@
     <title>Accueil</title>
 </head>
 <body>
+    <?php include 'php/header.php'; ?>
     
     <p>Accès Partie résultats<a href="dashboard.html">Résultats</a>
 
@@ -21,6 +22,6 @@
 <?php
 print_r(PDO::getAvailableDrivers());
 ?>
-
+<?php include 'php/footer.php'; ?>
 </body>
 </html>

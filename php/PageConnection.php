@@ -55,6 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </head>
 <body>
+    <?php include 'header.php'; ?>
     <div class="form-container">
         <h2>Connexion</h2>
         <form method="post" action="PageConnection.php">
@@ -67,5 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit">Se connecter</button>
         </form>
     </div>
+
+    <?php include 'footer.php'; ?>
 </body>
 </html>
