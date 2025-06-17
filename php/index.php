@@ -6,7 +6,7 @@
 </head>
 <body>
     
-    <p>ceci est un test : <a href="test.php">Se connecter</a>
+    <p>Accès Partie résultats<a href="dashboard.html">Résultats</a>
 
 
 
