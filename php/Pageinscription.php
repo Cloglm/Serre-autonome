@@ -38,7 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt = $pdo->prepare("INSERT INTO utilisateur (id, mot_de_passe, prenom, nom, email, role) VALUES (?, ?, ?, ?, ?, ?)");
                 $stmt->execute([$id, $motdepasse, $prenom, $nom, $email, $role]);
 
-                header("Location: index.php");
+                header("Location: ../index.php");
+
                 exit;
             }
         } catch (PDOException $e) {
