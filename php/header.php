@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Serre Autonome</title>
-    <link rel="stylesheet" href="/css/header.css">
-    <link rel="stylesheet" href="/css/footer.css">
-    <link rel="stylesheet" href="/css/header-footer-style.css">
-    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/header-footer-style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
 </head>
 <body>
 <header class="site-header">
@@ -18,6 +20,7 @@
             <li><a href="/Serre-autonome/index.php">Accueil</a></li>
             <li><a href="/Serre-autonome/control.html">Contrôle</a></li>
             <li><a href="/Serre-autonome/dashboard.html">Dashboard</a></li>
+            <li><a href="/Serre-autonome/php/PageConnection.php">Connexion</a></li>
         </ul>
     </nav>
 </header>
